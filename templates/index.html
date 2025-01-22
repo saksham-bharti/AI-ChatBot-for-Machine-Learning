@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning Chat-Bot</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='file.css') }}">
+</head>
+
+<body>
+    <!-- Chat Header -->
+    <div class="chat-header">
+        <h1>Machine Learning Chat-Bot</h1>
+    </div>
+    <div class="chat-container">
+        <!-- Sidebar for predefined questions -->
+        <div class="chat-sidebar">
+            <div style="margin-bottom: 30px;font-size: 20px;">
+                <h2>Frequent Questions</h2>
+            </div>
+            <div>
+
+                <ul class="predefined-questions" style="font-size: 20px;height: 715px;">
+                    {% for question in top_questions %}
+                    <li>{{ question }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <!-- Dark Mode Toggle -->
+            <div class="dark-mode-toggle">
+                <button id="toggle-dark-mode" class="btn btn-secondary" style="margin-right: 12px;">Dark Mode</button>
+                <button id="download-pdf" class="btn btn-primary">Download Chat History</button>
+            </div>
+        </div>
+
+        <!-- Main Chat Section -->
+        <div class="chat-main">
+            <!-- Chat Header
+            <div class="chat-header">
+                <h2>Machine Learning Chat-Bot</h2>
+            </div> -->
+            <!-- Chat Body -->
+            <div class="chat-body" id="response-container">
+                <!-- Dynamic messages will appear here -->
+            </div>
+            <!-- Chat Footer -->
+            <div class="chat-footer">
+                <form id="question-form" class="d-flex w-100" method="post">
+                    <input type="text" class="form-control" id="user_input" size="125" name="user_input"
+                        placeholder="Type your question..." required>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template for dynamic bot response with feedback -->
+    <template id="bot-response-template">
+        <div class="chat-message bot-message">
+            <div class="message-box">{{ summary }}</div>
+            <!-- Feedback Section -->
+             
+            <div class="feedback-section">
+                <div class="feedback-container">
+                    <label for="feedback_type">Feedback Type:</label>
+                    <select class="feedback-type" data-question="{{ question }}" data-answer="{{ summary }}">
+                        <option value="positive">Positive</option>
+                        <option value="negative">Negative</option>
+                    </select>
+            
+                    <label for="helpfulness_rating">Helpfulness Rating (1-5):</label>
+                    <input type="number" class="feedback-helpfulness" min="1" max="5" data-question="{{ question }}" data-answer="{{ summary }}" value="5">
+            
+                    <input type="text" class="feedback-comment" placeholder="Leave a comment..." data-question="{{ question }}" data-answer="{{ summary }}">
+            
+                    <button id="listen-feedback" class="btn btn-primary">Listen</button>
+                    <button id="submit-feedback" class="btn btn-success">Submit Feedback</button>
+                </div>
+            </div>
+            
+            
+        </div>
+    </template>
+
+    <!-- Submit Feedback Button -->
+    <div class="submit-feedback-container">
+
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
