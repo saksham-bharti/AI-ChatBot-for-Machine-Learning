@@ -20,9 +20,9 @@ embedder = SentenceTransformer('all-MiniLM-L6-v2')
 conn = psycopg2.connect(
     host="localhost",
     port="5432",
-    dbname="mydatabase",
-    user="postgres",
-    password="saksham@18"
+    dbname="yourDatabaseName",
+    user="yourUsername",
+    password="yourPassword"
 )
 cursor = conn.cursor()
 
